@@ -65,7 +65,7 @@ db.sequelize.sync().then(() => {
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Hi there, welcome to the Towngas App." });
+  res.json({ message: "-" });
 });
 
 // api routes
