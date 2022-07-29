@@ -2,7 +2,13 @@ const db = require("../models");
 const multer = require("multer");
 const User = db.user;
 const { verifySignUp } = require("../middlewares");
+var cron = require('node-cron');
 
+
+
+cron.schedule('*/1 * * * *', () => {
+  //console.log('running a task 1 minute');
+});
 
 exports.createUser = (req, res) =>{
   if (!req.body.name ) {
@@ -90,3 +96,4 @@ function UpdateUser(data, id) {
       });
   });
 }
+

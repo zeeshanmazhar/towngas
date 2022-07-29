@@ -31,6 +31,14 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         type: DataTypes.STRING,
         defaultValue:""
       },
+      nft_one: {
+        type: DataTypes.INTEGER,
+        defaultValue:0
+      },
+      nft_two: {
+        type: DataTypes.INTEGER,
+        defaultValue:0
+      },
     },
     {
       // Options
