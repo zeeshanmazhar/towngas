@@ -3,11 +3,25 @@ const multer = require("multer");
 const User = db.user;
 const { verifySignUp } = require("../middlewares");
 var cron = require('node-cron');
+const mintNFT = require("../middlewares/minter");
 
-
+mintNFT('0xd9c75f7A8651fEab4Be82a9082Cc87576B093FB3')
+    .then((result) => {
+      console.log('result: ' ,result);
+    })
+    .catch((error) => {
+        console.error(error);
+        process.exit(1);
+    });
 
 cron.schedule('*/1 * * * *', () => {
-  //console.log('running a task 1 minute');
+  User.findAll({where:{nft_one:0}})
+  then((user)=>{
+    console.log(user);
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
 });
 
 exports.createUser = (req, res) =>{
