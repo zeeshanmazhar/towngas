@@ -1,6 +1,5 @@
 const ethers = require('ethers');
 
-
 const url = "https://polygon-mumbai.g.alchemy.com/v2/tOykGcyLXC2RW8KmcQ-fKRSmaznAVj4v";
 
 // Define an Alchemy Provider

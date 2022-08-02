@@ -25,18 +25,30 @@ verifyToken = (req, res, next) => {
   });
 };
 
+isAdmin = (req, res, next) => {
+  User.findByPk(req.userId).then(user => {
+        if (user.role === "admin") {
+          next();
+          return;
+        }
+      res.status(403).send({
+        message: "Require Admin Role!"
+      });
+      return;
+    });
+};
 
 logout = (req, res, next)=>{
   let token = req.headers["x-access-token"];
   jwt.destroy(token);
   next();
   return;
-
 }
 
 const authJwt = {
   verifyToken: verifyToken,
-  logout: logout
+  logout: logout,
+  isAdmin:isAdmin
 };
 
 module.exports = authJwt;

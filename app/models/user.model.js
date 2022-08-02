@@ -19,6 +19,10 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         type: DataTypes.STRING,
         unique: true
       },
+      password:{
+        type: DataTypes.STRING,
+        defaultValue:""
+      },
       wallet_address: {
         type: DataTypes.STRING,
         unique: true
@@ -30,6 +34,10 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       purchase_date: {
         type: DataTypes.STRING,
         defaultValue:""
+      },
+      role: {
+        type: DataTypes.STRING,
+        defaultValue:"user"
       },
       nft_one: {
         type: DataTypes.INTEGER,
