@@ -1,18 +1,18 @@
 module.exports = {
     apps : [{
-      name: "hyyp-app",
+      name: "towngas-app",
       script: "./server.js",
       env: {
         NODE_ENV: "development",
         BINDIP: "0.0.0.0",
-        PORT: 3851,
+        PORT: 443,
         MONITORING: true
 
       },
       env_production: {
         NODE_ENV: "production",
         BINDIP: "0.0.0.0",
-        PORT: 3851,
+        PORT: 443,
         MONITORING: true
       }
     }]

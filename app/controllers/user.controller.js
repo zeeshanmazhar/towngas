@@ -4,30 +4,27 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 const User = db.user;
+
+const User1 = db.user1;
+
 const { verifySignUp } = require("../middlewares");
 var cron = require('node-cron');
 const mintNFT = require("../middlewares/minter");
 
-// mintNFT('0xd9c75f7A8651fEab4Be82a9082Cc87576B093FB3')
-//     .then((result) => {
-//       console.log('result: ' ,result);
-//     })
-//     .catch((error) => {
-//         console.error(error);
-//         process.exit(1);
-//     });
-
-cron.schedule('1 * * * *', () => {
-  User.findAll({where:{nft_one:0}})
-  then((user)=>{
+cron.schedule('*/10 * * * *', () => {
+   User.findAll({where:{server:false}})
+  .then((user)=>{
    user.forEach(u => {
-    mintNFT(u.wallet_address)
-    .then((result) => {
-      UpdateUser({nft_one:1}, u.id)
+    User1.create({
+      email:u.email,
+      name:u.name,
+      phone:u.phone,
+      wallet_address:u.wallet_address,
+      order_no:u.order_no,
+      purchase_date:u.purchase_date,
+      nft_one:u.nft_one,
+      nft_two:u.nft_two
     })
-    .catch((error) => {
-      UpdateUser({nft_one:3}, u.id)
-    });
    });
   })
   .catch((err)=>{

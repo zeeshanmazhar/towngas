@@ -4,23 +4,18 @@ module.exports = {
 
   /** DATABASE */
   db: {
-    // DB_HOST: process.env.DB_HOST,
-    // DB_USER: process.env.DB_USER,
-    // DB_PASS: process.env.DB_PASS,
-    // DB_NAME: process.env.DB_NAME,
-    DB_HOST: 'towngas-db.c0zyiumcw5lo.eu-central-1.rds.amazonaws.com',
-    DB_USER: 'towngasuser',
-    DB_PASS: 'XktWftNDLreY8di',
+    DB_HOST: 'nftprdd01aw.ctymd45abzdi.ap-east-1.rds.amazonaws.com',
+    DB_USER: 'nft160user',
+    DB_PASS: 'nftuserP@ssw0rd2022',
     DB_NAME: 'towngas',
     dialect: 'mysql',
-
-    // pool is optional, it will be used for Sequelize connection pool configuration
-    // pool: {
-    //   max: 5,
-    //   min: 0,
-    //   acquire: 30000,
-    //   idle: 10000
-    // }
+  },
+  db1:{
+    DB_HOST: 'database-2.cap4voenyn2t.us-east-1.rds.amazonaws.com',
+    DB_USER: 'admin',
+    DB_PASS: 'TownGas-123',
+    DB_NAME: 'towngas',
+    dialect: 'mysql',
   },
 
   /** AUTH KEY */
