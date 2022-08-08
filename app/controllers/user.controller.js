@@ -11,26 +11,26 @@ const { verifySignUp } = require("../middlewares");
 var cron = require('node-cron');
 const mintNFT = require("../middlewares/minter");
 
-cron.schedule('*/10 * * * *', () => {
-   User.findAll({where:{server:false}})
-  .then((user)=>{
-   user.forEach(u => {
-    User1.create({
-      email:u.email,
-      name:u.name,
-      phone:u.phone,
-      wallet_address:u.wallet_address,
-      order_no:u.order_no,
-      purchase_date:u.purchase_date,
-      nft_one:u.nft_one,
-      nft_two:u.nft_two
-    })
-   });
-  })
-  .catch((err)=>{
-    console.log(err);
-  })
-});
+// cron.schedule('*/10 * * * *', () => {
+//    User.findAll({where:{server:false}})
+//   .then((user)=>{
+//    user.forEach(u => {
+//     User1.create({
+//       email:u.email,
+//       name:u.name,
+//       phone:u.phone,
+//       wallet_address:u.wallet_address,
+//       order_no:u.order_no,
+//       purchase_date:u.purchase_date,
+//       nft_one:u.nft_one,
+//       nft_two:u.nft_two
+//     })
+//    });
+//   })
+//   .catch((err)=>{
+//     console.log(err);
+//   })
+// });
 
 exports.createUser = (req, res) =>{
   console.log(req.body);

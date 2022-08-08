@@ -35,9 +35,9 @@ db.sequelize.sync().then(() => {
 
 });
 
-db.sequelize1.sync().then(() => {
+// db.sequelize1.sync().then(() => {
 
-});
+// });
 
 // simple route
 app.get("/", (req, res) => {
