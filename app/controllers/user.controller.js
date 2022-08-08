@@ -4,28 +4,40 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 const User = db.user;
-
-const User1 = db.user1;
+const axios = require('axios');
 
 const { verifySignUp } = require("../middlewares");
 var cron = require('node-cron');
 const mintNFT = require("../middlewares/minter");
 
-// cron.schedule('*/10 * * * *', () => {
-//    User.findAll({where:{server:false}})
-//   .then((user)=>{
-//    user.forEach(u => {
-//     User1.create({
-//       wallet_address:u.wallet_address,
-//       nft_one:u.nft_one,
-//       nft_two:u.nft_two
-//     })
-//    });
-//   })
-//   .catch((err)=>{
-//     console.log(err);
-//   })
-// });
+
+cron.schedule('*/10 * * * *', () => {
+
+User.findAll({attributes: ['wallet_address','id'],where:{server:false}})
+.then((a)=>{
+  axios
+  .post('http://3.72.112.244:3851/api/auto', { data: a })
+    .then(function (response) {
+
+      if (response.data == 'done') {
+        console.log(response.data);
+        UpdateServerFlag(a);
+      }
+      else{
+        console.log('====================================');
+        console.log(response.data);
+        console.log('====================================');
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+})
+
+  .catch((err)=>{
+    console.log(err);
+  })
+});
 
 exports.createUser = (req, res) =>{
   console.log(req.body);
@@ -97,215 +109,18 @@ exports.createUser = (req, res) =>{
 
 }
 
-exports.signin = (req, res) => {
-  User.findOne({
-    where: {
-      email: req.body.email,
-    },
-  })
-    .then((user) => {
-      console.log(user);
-      if (!user) {
-        return res.status(404).send({ message: "User Not found." });
-      }
-
-      let passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-      );
-
-      if (!passwordIsValid) {
-        return res.status(401).send({
-          accessToken: null,
-          message: "Invalid Password!",
-        });
-      }
-
-      let token = jwt.sign({ id: user.id }, config.auth.secret, {
-        expiresIn: 86400, // 24 hours
-      });
-
-        res.status(200).send({
-          user:user,
-          accessToken: token,
-        });
-
-    })
-    .catch((err) => {
-      res.status(500).send({ message: err.message });
-    });
-};
-
-exports.allUsers = (req, res) =>{
-  User.findAll({where:{role:'user'}})
-    .then((users)=>{
-      res.send(users);
-    })
-}
-
-exports.allToCheck = (req, res) =>{
-  User.findAll({role:'user', nft_one:0})
-    .then((users)=>{
-      res.send(users);
-    })
-}
-
-exports.acceptRegistration = (req, res)=>{
-
-  if (!req.body.user_id ) {
-    res.status(400).send({
-      message: "User id can not be empty!",
-    });
-    return;
-  }
-
-  userId = req.body.user_id;
-  User.findOne({where:{id:userId}})
-  .then((user)=>{
-
-    if (!user) {
-      return res.status(404).send({ message: "User Not found." });
-    }
-    if (user.nft_two == 1) {
-      return res.status(500).send({ message: "User already has 2nd NFT." });
-    }
-    console.log(user.wallet_address);
-    mintNFT(user.wallet_address)
-    .then((result) => {
-      UpdateUser({nft_two:1}, userId)
-      res.send(result);
-    })
-    .catch((error) => {
-      res.status(500).send(error)
+function UpdateServerFlag(data) {
+  return new Promise((resolve, reject) => {
+    data.forEach(e => {
+      User.update({server:true}, {
+        where: { id: e.id },
+      }).then((num) => {})
     });
 
-  })
-}
-
-exports.rejectRegistration = (req, res)=>{
-  if (!req.body.user_id ) {
-    res.status(400).send({
-      message: "User id can not be empty!",
-    });
-    return;
-  }
-  userId = req.body.user_id;
-  User.findOne({where:{id:userId}})
-  .then((user)=>{
-
-    if (!user) {
-      return res.status(404).send({ message: "User Not found." });
-    }
-
-      UpdateUser({nft_two:2}, userId)
-      .then((data)=>{
-          if (data.code == 200) {
-              res.send('User rejected.')
-          }else{
-            res.status(data.code).send(res.message)
-          }
-      })
-
-  })
+  });
 }
 
 
-exports.mintFirstNFT = (req, res)=>{
-  if (!req.body.user_id ) {
-    res.status(400).send({
-      message: "User id can not be empty!",
-    });
-    return;
-  }
-  userId = req.body.user_id;
-  User.findOne({where:{id:userId}})
-  .then((user)=>{
-    if (!user) {
-      return res.status(404).send({ message: "User Not found." });
-    }
-    if (user.nft_one == 1) {
-      return res.status(500).send({ message: "User already has 1st NFT." });
-    }
-
-    mintNFT(user.wallet_address)
-    .then((result) => {
-      UpdateUser({nft_one:1}, userId)
-      res.send(result);
-    })
-    .catch((error) => {
-      UpdateUser({nft_one:3}, userId)
-      res.status(500).send(error)
-    });
-
-  })
-}
-
-exports.mintOnAddress = (req, res)=>{
-  if (!req.body.wallet_address ) {
-      res.status(400).send({
-        message: "Wallet address can not be empty!",
-      });
-      return;
-    }
-
-    mintNFT(req.body.wallet_address)
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((error) => {
-      res.status(500).send(error)
-    });
-
-
-}
-
-exports.mintSecondNFT = (req, res)=>{
-  if (!req.body.user_id ) {
-    res.status(400).send({
-      message: "User id can not be empty!",
-    });
-    return;
-  }
-  userId = req.body.user_id;
-  User.findOne({where:{id:userId}})
-  .then((user)=>{
-    if (!user) {
-      return res.status(404).send({ message: "User Not found." });
-    }
-    if (user.nft_two == 1) {
-      return res.status(500).send({ message: "User already has 1st NFT." });
-    }
-
-    mintNFT(user.wallet_address)
-    .then((result) => {
-      UpdateUser({nft_two:1}, userId)
-      res.send(result);
-    })
-    .catch((error) => {
-      res.status(500).send(error)
-    });
-
-  })
-}
-
-exports.count = async (req, res) =>  {
-
-    TotalRegistrations = await User.count({where:{role:'user'}});
-    frist_mint = await User.count({where:{nft_one:1}});
-    second_mint = await User.count({where:{nft_two:1}});
-    rejected = await User.count({where:{nft_two:2}});
-    accepted = await User.count({where:{nft_two:1}});
-    awating_accept = await User.count({where:{nft_two:0}});
-
-    res.send({
-      total_registered_users:TotalRegistrations,
-      minted_first_nft: frist_mint,
-      minted_second_nft: second_mint,
-      rejected: rejected,
-      accepted: accepted,
-      awaiting_acceptance: awating_accept
-    })
-}
 
 function UpdateUser(data, id) {
   return new Promise((resolve, reject) => {
