@@ -47,10 +47,10 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         defaultValue:0
       },
-      // server:{
-      //   type: DataTypes.BOOLEAN,
-      //   defaultValue:false
-      // }
+      server:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:false
+      }
     },
     {
       // Options
