@@ -16,12 +16,7 @@ const mintNFT = require("../middlewares/minter");
 //   .then((user)=>{
 //    user.forEach(u => {
 //     User1.create({
-//       email:u.email,
-//       name:u.name,
-//       phone:u.phone,
 //       wallet_address:u.wallet_address,
-//       order_no:u.order_no,
-//       purchase_date:u.purchase_date,
 //       nft_one:u.nft_one,
 //       nft_two:u.nft_two
 //     })
