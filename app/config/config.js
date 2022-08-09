@@ -1,11 +1,11 @@
 module.exports = {
   NODE_ENV: process.env.NODE_ENV,
-  PORT: process.env.PORT || 1234,
+  PORT: process.env.PORT || 443,
 
   /** DATABASE */
   db: {
     DB_HOST: 'nftprdd01aw.ctymd45abzdi.ap-east-1.rds.amazonaws.com',
-    DB_USER: 'nft160user',
+    DB_USER: 'nftuser',
     DB_PASS: 'nftuserP@ssw0rd2022',
     DB_NAME: 'towngas',
     dialect: 'mysql',
