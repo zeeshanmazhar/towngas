@@ -1,6 +1,6 @@
 module.exports = {
   NODE_ENV: process.env.NODE_ENV,
-  PORT: process.env.PORT || 443,
+  PORT: process.env.PORT || 1234,
 
   /** DATABASE */
   db: {
