@@ -32,7 +32,7 @@ const db = require("./app/models");
 const { SMALLINT } = require("sequelize");
 
 db.sequelize.sync().then(() => {
-
+  console.log(db.sequelize.connectionManager.getConnection().toString())
 });
 
 // db.sequelize1.sync().then(() => {
