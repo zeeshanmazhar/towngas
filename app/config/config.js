@@ -5,8 +5,8 @@ module.exports = {
   /** DATABASE */
   db: {
     DB_HOST: 'nftprdd01aw.ctymd45abzdi.ap-east-1.rds.amazonaws.com',
-    DB_USER: 'nftuser',
-    DB_PASS: 'nftuserP@ssw0rd2022',
+    DB_USER: 'tgsysadm',
+    DB_PASS: 'tMt34aAbDgEPwGXR',
     DB_NAME: 'towngas',
     dialect: 'mysql',
   },
