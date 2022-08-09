@@ -28,29 +28,24 @@ app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(express.static('public'));
 
 // database
-// const db = require("./app/models");
-// const { SMALLINT } = require("sequelize");
+const db = require("./app/models");
 
-// db.sequelize.sync().then(() => {
-//   console.log("DB connection succesful")
-//   console.log(db.sequelize.connectionManager.getConnection().toString())
-// }).catch((err) => console.log(err));
-
-// db.sequelize1.sync().then(() => {
-
-// });
+db.sequelize.sync().then(() => {
+  console.log("DB connection succesful")
+  console.log(db.sequelize.connectionManager.getConnection().toString())
+}).catch((err) => console.log(err));
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "-" });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "-" });
+// });
 
-// api routes
+// // api routes
 
-require("./app/routes/user.routes")(app);
+// require("./app/routes/user.routes")(app);
 
-// set port, listen for requests
-const PORT = config.PORT;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// // set port, listen for requests
+// const PORT = config.PORT;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
