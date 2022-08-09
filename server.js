@@ -31,9 +31,9 @@ app.use(express.static('public'));
 const db = require("./app/models");
 const { SMALLINT } = require("sequelize");
 
-db.sequelize.sync().then(() => {
+// db.sequelize.sync().then(() => {
 
-});
+// });
 
 // db.sequelize1.sync().then(() => {
 
