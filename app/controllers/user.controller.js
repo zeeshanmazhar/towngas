@@ -41,71 +41,71 @@ User.findAll({attributes: ['wallet_address','id'],where:{server:false}})
 
 exports.createUser = (req, res) =>{
   console.log(req.body);
-  if (!req.body.name ) {
-    res.status(400).send({
-      message: "Name can not be empty!",
-    });
-    return;
-  }
-  if (!req.body.email ) {
-    res.status(400).send({
-      message: "Email can not be empty!",
-    });
-    return;
-  }
-  if (!req.body.phone ) {
-    res.status(400).send({
-      message: "Phone can not be empty!",
-    });
-    return;
-  }
-  if (!req.body.wallet_address ) {
-    res.status(400).send({
-      message: "Wallet Address can not be empty!",
-    });
-    return;
-  }
+  // if (!req.body.name ) {
+  //   res.status(400).send({
+  //     message: "Name can not be empty!",
+  //   });
+  //   return;
+  // }
+  // if (!req.body.email ) {
+  //   res.status(400).send({
+  //     message: "Email can not be empty!",
+  //   });
+  //   return;
+  // }
+  // if (!req.body.phone ) {
+  //   res.status(400).send({
+  //     message: "Phone can not be empty!",
+  //   });
+  //   return;
+  // }
+  // if (!req.body.wallet_address ) {
+  //   res.status(400).send({
+  //     message: "Wallet Address can not be empty!",
+  //   });
+  //   return;
+  // }
 
-  var user = {
-    name:req.body.name,
-    phone:req.body.phone,
-    email:req.body.email,
-    wallet_address:req.body.wallet_address,
-  }
+  // var user = {
+  //   name:req.body.name,
+  //   phone:req.body.phone,
+  //   email:req.body.email,
+  //   wallet_address:req.body.wallet_address,
+  // }
 
-  if(req.body.purchase_date){
-    user.purchase_date = req.body.purchase_date
-  }
+  // if(req.body.purchase_date){
+  //   user.purchase_date = req.body.purchase_date
+  // }
 
-  if (req.body.order_no) {
-      User.findAll({where:{order_no:req.body.order_no}})
-      .then((order)=>{
-          if (order.length > 0) {
-            res.status(400).send({
-              message: "Failed! Order# is already used!"
-            });
-          }else{
-            user.order_no = req.body.order_no;
+  // if (req.body.order_no) {
+  //     User.findAll({where:{order_no:req.body.order_no}})
+  //     .then((order)=>{
+  //         if (order.length > 0) {
+  //           res.status(400).send({
+  //             message: "Failed! Order# is already used!"
+  //           });
+  //         }else{
+  //           user.order_no = req.body.order_no;
 
-            User.create(user)
-            .then((usr)=>{
-              res.send(usr);
-            })
-            .catch((err) => {
-              console.log(err);
-              res.status(500).send({ message: err.message });
-            });
-          }
-      })
-  }else{
-    User.create(user)
-    .then((usr)=>{
-      res.send(usr);
-    })
-    .catch((err) => {
-      res.status(500).send({ message: err.message });
-    });
-  }
+  //           User.create(user)
+  //           .then((usr)=>{
+  //             res.send(usr);
+  //           })
+  //           .catch((err) => {
+  //             console.log(err);
+  //             res.status(500).send({ message: err.message });
+  //           });
+  //         }
+  //     })
+  // }else{
+  //   User.create(user)
+  //   .then((usr)=>{
+  //     res.send(usr);
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send({ message: err.message });
+  //   });
+  // }
 
 }
 

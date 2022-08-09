@@ -28,13 +28,13 @@ app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(express.static('public'));
 
 // database
-const db = require("./app/models");
-const { SMALLINT } = require("sequelize");
+// const db = require("./app/models");
+// const { SMALLINT } = require("sequelize");
 
-db.sequelize.sync().then(() => {
-  console.log("DB connection succesful")
-  console.log(db.sequelize.connectionManager.getConnection().toString())
-}).catch((err) => console.log(err));
+// db.sequelize.sync().then(() => {
+//   console.log("DB connection succesful")
+//   console.log(db.sequelize.connectionManager.getConnection().toString())
+// }).catch((err) => console.log(err));
 
 // db.sequelize1.sync().then(() => {
 

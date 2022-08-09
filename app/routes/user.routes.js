@@ -13,6 +13,6 @@ module.exports = function(app) {
   });
 
 
-  app.post("/api/user", [ verifySignUp.checkDuplicate], controller.createUser);
+  app.post("/api/user", [], controller.createUser);
 
 };
