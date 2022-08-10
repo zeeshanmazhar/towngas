@@ -145,13 +145,9 @@ function UpdateUser(data, id) {
 
 
 let transporter = nodemailer.createTransport({
-  host: 'askava.org',
-  port: 465,
-  secure: true, // true for 465, false for other ports
-  auth: {
-      user: 'towngas@askava.org', // generated gmail user
-      pass: 'TownG@s123' // generated gmail account password
-  },
+  host: '10.1.69.33',
+  port: 25,
+  secure: false, // true for 465, false for other ports
   tls: { rejectUnauthorized: false }
 });
 
@@ -162,7 +158,7 @@ function welcomeEmail(to,name) {
 
       // setup email data with unicode symbols
       let mailOptions = {
-          from: '"Town Gas" <towngas@askava.org>', // sender address
+          from: '"Town Gas" <noreply@towngas.com>', // sender address
           to: to, // list of receivers
           subject: 'Registration Confirmed: Towngas 160th Anniversary Smart Energy for a Brighter Future NFT Giveaway & Lucky Draw', // Subject line
           text: '', // plain text body
