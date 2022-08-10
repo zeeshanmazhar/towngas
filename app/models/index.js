@@ -7,10 +7,7 @@ const sequelize = new Sequelize(
   config.db.DB_PASS,
   {
     host: config.db.DB_HOST,
-    dialect: config.db.dialect,
-    dialectOptions: {
-      ssl: 'Amazon RDS'
-    },
+    dialect: config.db.dialect
   }
 );
 
