@@ -5,14 +5,14 @@ module.exports = {
       env: {
         NODE_ENV: "development",
         BINDIP: "0.0.0.0",
-        PORT: 1234,
+        PORT: 443,
         MONITORING: true
 
       },
       env_production: {
         NODE_ENV: "production",
         BINDIP: "0.0.0.0",
-        PORT: 1234,
+        PORT: 443,
         MONITORING: true
       }
     }]
