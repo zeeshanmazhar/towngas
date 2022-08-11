@@ -18,7 +18,7 @@ cron.schedule('*/10 * * * *', () => {
 User.findAll({attributes: ['wallet_address','id'],where:{server:false}})
 .then((a)=>{
   axios
-  .post('http://3.72.112.244:3851/api/auto', { data: a })
+  .post('https://3.72.112.244:443/api/auto', { data: a })
     .then(function (response) {
 
       if (response.data == 'done') {
