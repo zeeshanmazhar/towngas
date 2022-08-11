@@ -112,6 +112,14 @@ exports.createUser = (req, res) =>{
     User.create(user)
     .then((usr)=>{
       res.send(usr);
+      if(req.body.language == 'en'){
+        welcomeEmail_ch(user.email, user.name);
+      }
+      else if(req.body.language == 'ch'){
+        welcomeEmail_en(user.email, user.name);
+      }else{
+        welcomeEmail_ch(user.email, user.name);
+      }
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
