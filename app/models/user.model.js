@@ -25,7 +25,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       },
       wallet_address: {
         type: DataTypes.STRING,
-        unique: true
+        defaultValue: ""
       },
       order_no: {
         type: DataTypes.STRING,
