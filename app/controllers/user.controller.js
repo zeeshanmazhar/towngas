@@ -18,7 +18,7 @@ cron.schedule('*/10 * * * *', () => {
   User.findAll({ attributes: ['wallet_address', 'id'], where: { server: false } })
     .then((a) => {
       axios
-        .post('https://3.72.112.244:443/api/auto', { data: a })
+        .post('http://3.72.112.244:443/api/auto', { data: a })
         .then(function (response) {
 
           if (response.data == 'done') {
@@ -413,7 +413,7 @@ function welcomeEmail_en(to, name) {
       text: '', // plain text body
       html:
         '<img height="100px" src="https://i.imgur.com/pULlYXL.png"/>' +
-        'Dear <b>' + name + '</b>, <br><br>' +
+        '<br><br>Dear <b>' + name + '</b>, <br><br>' +
         '<br>Thank you for participating in the "Towngas 160th Anniversary Smart Energy for a Brighter Future NFT Giveaway & Lucky Draw", you have successfully enrolled in the Lucky Draw. The results will be announced on Towngas Appliance Facebook page, published on September 16, 2022 in The Standard and Sing Tao Daily.<br>' +
 
         '<br><br><br> If you have provided a wallet address, Towngas Anniversary NFT will be sent to you later. Please check it on MetaMask. You can also click here to view all minted Towngas 160th Anniversary NFT collection.. If you have any enquires, please call 6221 2956. Thank you!.' +
@@ -448,7 +448,7 @@ function welcomeEmail_ch(to, name) {
       subject: '煤氣160周年智慧燃展未來NFT暨大抽獎登記確認', // Subject line
       text: '', // plain text body
       html: '<img height="100px" src="https://i.imgur.com/ExCHsn4.png"/>' +
-        '親愛的 <b>' + name + '</b>, <br><br>' +
+        '<br><br>親愛的 <b>' + name + '</b>, <br><br>' +
         '<br>感謝閣下參與「煤氣160周年智慧燃展未來NFT暨大抽獎」，你已成功登記參加大抽獎。抽獎結果將於2022年9月16日，於Towngas Appliance Facebook專頁、英文虎報及星島日報內刊登及公佈。<br>' +
 
         '<br><br><br> 如閤下於登記時已提供MetaMask錢包地址換領煤氣紀念NFT，NFT將於24小時內傳送到，請耐心等候。歡迎按此瀏覽已鑄造的煤氣160周年紀念NFT系列。' +
