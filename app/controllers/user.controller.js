@@ -61,12 +61,6 @@ exports.createUser = (req, res) => {
     });
     return;
   }
-  if (!req.body.wallet_address) {
-    res.status(400).send({
-      message: "Wallet Address can not be empty!",
-    });
-    return;
-  }
 
   var user = {
     name: req.body.name,
