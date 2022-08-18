@@ -42,22 +42,24 @@ cron.schedule('*/10 * * * *', () => {
 });
 
 exports.createUser = (req, res) => {
-  console.log(req.body);
   if (!req.body.name) {
-    res.status(400).send({
-      message: "Name can not be empty!",
+    res.send({
+      error: "Name can not be empty!",
+      type: 1
     });
     return;
   }
   if (!req.body.email) {
-    res.status(400).send({
-      message: "Email can not be empty!",
+    res.send({
+      error: "Email can not be empty!",
+      type: 2
     });
     return;
   }
   if (!req.body.phone) {
-    res.status(400).send({
-      message: "Phone can not be empty!",
+    res.send({
+      error: "Phone can not be empty!",
+      type: 3
     });
     return;
   }
@@ -77,12 +79,11 @@ exports.createUser = (req, res) => {
     User.findAll({ where: { order_no: req.body.order_no } })
       .then((order) => {
         if (order.length > 0) {
-          res.status(400).send({
-            message: "Failed! Order# is already used!"
+          res.send({
+            error: "Failed! Order# is already used!"
           });
         } else {
           user.order_no = req.body.order_no;
-
           User.create(user)
             .then((usr) => {
               if (req.body.language == 'en') {
@@ -93,12 +94,10 @@ exports.createUser = (req, res) => {
               } else {
                 welcomeEmail_ch(user.email, user.name);
               }
-
               res.send(usr);
             })
             .catch((err) => {
-              console.log(err);
-              res.status(500).send({ message: err.message });
+              res.send({ error: err.message });
             });
         }
       })
@@ -116,7 +115,7 @@ exports.createUser = (req, res) => {
         }
       })
       .catch((err) => {
-        res.status(500).send({ message: err.message });
+        res.send({ error: err.message });
       });
   }
 
