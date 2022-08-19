@@ -49,6 +49,7 @@ exports.createUser = (req, res) => {
     });
     return;
   }
+
   if (!req.body.email) {
     res.send({
       error: "Email can not be empty!",
@@ -56,6 +57,16 @@ exports.createUser = (req, res) => {
     });
     return;
   }
+  User.findAll({ where: { email: req.body.email } })
+    .then((users) => {
+      if (users.length > 0) {
+        res.send({
+          error: "Failed! Email is already used!",
+          type: 2
+        });
+        return;
+      }
+    });
   if (!req.body.phone) {
     res.send({
       error: "Phone can not be empty!",
@@ -63,6 +74,16 @@ exports.createUser = (req, res) => {
     });
     return;
   }
+  User.findAll({ where: { phone: req.body.phone } })
+    .then((users) => {
+      if (users.length > 0) {
+        res.send({
+          error: "Failed! Phone is already used!",
+          type: 3
+        });
+        return;
+      }
+    });
 
   var user = {
     name: req.body.name,
@@ -80,7 +101,8 @@ exports.createUser = (req, res) => {
       .then((order) => {
         if (order.length > 0) {
           res.send({
-            error: "Failed! Order# is already used!"
+            error: "Failed! Order# is already used!",
+            type: 4
           });
         } else {
           user.order_no = req.body.order_no;
