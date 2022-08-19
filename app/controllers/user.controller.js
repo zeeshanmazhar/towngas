@@ -430,11 +430,11 @@ function welcomeEmail_en(to, name) {
       subject: 'Registration Confirmed: Towngas 160th Anniversary Smart Energy for a Brighter Future NFT Giveaway & Lucky Draw', // Subject line
       text: '', // plain text body
       html:
-        '<img height="100px" src="https://i.imgur.com/pULlYXL.png"/>' +
+        '<a href="https://160nftluckydraw.towngasappliance.com/"><img height="100px" src="https://i.imgur.com/pULlYXL.png"/></a>' +
         '<br><br>Dear <b>' + name + '</b>, <br><br>' +
-        '<br>Thank you for participating in the "Towngas 160th Anniversary Smart Energy for a Brighter Future NFT Giveaway & Lucky Draw", you have successfully enrolled in the Lucky Draw. The results will be announced on Towngas Appliance Facebook page, published on September 16, 2022 in The Standard and Sing Tao Daily.<br>' +
+        '<br>Thank you for participating in the "Towngas 160th Anniversary Smart Energy for a Brighter Future NFT Giveaway & Lucky Draw", you have successfully enrolled in the Lucky Draw. The results will be announced on Towngas Appliance Facebook page, published on September 21, 2022 in The Standard and Sing Tao Daily.<br>' +
 
-        '<br><br><br> If you have provided a wallet address, Towngas Anniversary NFT will be sent to you later. Please check it on MetaMask. You can also click here to view all minted Towngas 160th Anniversary NFT collection.. If you have any enquires, please call 6221 2956. Thank you!.' +
+        '<br><br><br> If you have provided a wallet address, Towngas Anniversary NFT will be sent to you later. Please check it on MetaMask. You can also <a href="https://opensea.io/collection/towngas160nft">click here</a> to view all minted Towngas 160th Anniversary NFT collection.. If you have any enquires, please call 6221 2956. Thank you!.' +
         '<br><br><br> The Hong Kong and China Gas Company Limited.' +
         '<br><br><br> (This email is automatically sent by the system, please do not reply)'
     };
@@ -465,11 +465,11 @@ function welcomeEmail_ch(to, name) {
       to: to, // list of receivers
       subject: '煤氣160周年智慧燃展未來NFT暨大抽獎登記確認', // Subject line
       text: '', // plain text body
-      html: '<img height="100px" src="https://i.imgur.com/ExCHsn4.png"/>' +
+      html: '<a href="https://160nftluckydraw.towngasappliance.com/"><img height="100px" src="https://i.imgur.com/ExCHsn4.png"/></a>' +
         '<br><br>親愛的 <b>' + name + '</b>, <br><br>' +
-        '<br>感謝閣下參與「煤氣160周年智慧燃展未來NFT暨大抽獎」，你已成功登記參加大抽獎。抽獎結果將於2022年9月16日，於Towngas Appliance Facebook專頁、英文虎報及星島日報內刊登及公佈。<br>' +
+        '<br>感謝閣下參與「煤氣160周年智慧燃展未來NFT暨大抽獎」，你已成功登記參加大抽獎。抽獎結果將於2022年9月21日，於Towngas Appliance Facebook專頁、英文虎報及星島日報內刊登及公佈。<br>' +
 
-        '<br><br><br> 如閤下於登記時已提供MetaMask錢包地址換領煤氣紀念NFT，NFT將於24小時內傳送到，請耐心等候。歡迎按此瀏覽已鑄造的煤氣160周年紀念NFT系列。' +
+        '<br><br><br> 如閤下於登記時已提供MetaMask錢包地址換領煤氣紀念NFT，NFT將於24小時內傳送到，請耐心等候。歡迎<a href="https://opensea.io/collection/towngas160nft">按此</a>瀏覽已鑄造的煤氣160周年紀念NFT系列。' +
         '<br><br><br> 如有任何問題，請致電6221 2956查詢，謝謝!' +
         '<br><br><br> 香港中華煤氣有限公司' +
         '<br><br><br> (本電郵由系統自動傳送，請勿直接回覆)'
