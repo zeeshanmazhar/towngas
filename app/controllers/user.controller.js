@@ -89,7 +89,10 @@ exports.createUser = (req, res) => {
     name: req.body.name,
     phone: req.body.phone,
     email: req.body.email,
-    wallet_address: req.body.wallet_address,
+  }
+
+  if (req.body.wallet_address && req.body.wallet_address.length > 0) {
+    user.wallet_address = req.body.wallet_address
   }
 
   if (req.body.purchase_date) {
